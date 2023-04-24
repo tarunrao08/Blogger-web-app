@@ -1,0 +1,34 @@
+@import "global-imports";
+
+.space-between {
+  flex: 1;
+}
+
+.navbar {
+  &__heading {
+    cursor: pointer;
+  }
+  &__menu-btn {
+    margin-left: 0.5rem;
+    @include fontStyle(0.9rem);
+  }
+  &__add-btn {
+    @media only screen and (max-width: 400px) {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      margin: 1rem;
+      border-radius: 50%;
+      width: 3rem;
+      height: 3rem;
+      padding: 0;
+      min-width: auto;
+      z-index: 100;
+    }
+  }
+  &__add-btn .hide {
+    @media only screen and (max-width: 400px) {
+      display: none;
+    }
+  }
+}

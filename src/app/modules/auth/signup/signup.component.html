@@ -1,0 +1,50 @@
+<form (ngSubmit)="onSubmit()" class="form" [formGroup]="signupForm">
+  <div class="form__heading">Sign-Up</div>
+  <mat-form-field appearance="outline">
+    <mat-label>Username</mat-label>
+    <input
+      type="text"
+      name="username"
+      id="username"
+      matInput
+      formControlName="username"
+      required
+    />
+    <mat-error *ngIf="signupForm.get('username')?.invalid">{{
+      getUsernameErrorMessage()
+    }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput formControlName="email" required />
+    <mat-error *ngIf="signupForm.get('email')?.invalid">{{
+      getEmailErrorMessage()
+    }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input type="password" matInput formControlName="password" required />
+    <mat-error *ngIf="signupForm.get('password')?.invalid">{{
+      getPasswordErrorMessage()
+    }}</mat-error>
+  </mat-form-field>
+  <ng-template [ngIf]="!isLoading" [ngIfElse]="loading">
+    <button
+      mat-raised-button
+      color="primary"
+      class="form__btn"
+      [disabled]="!signupForm.valid"
+    >
+      Sign Up
+    </button>
+  </ng-template>
+  <ng-template #loading>
+    <app-spinner></app-spinner>
+  </ng-template>
+  <div class="form__error">
+    <mat-error *ngIf="baseError">{{ baseError }}</mat-error>
+  </div>
+  <a [routerLink]="['/login']" class="form__link" href=""
+    >Already have a account?</a
+  >
+</form>

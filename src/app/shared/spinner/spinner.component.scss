@@ -1,0 +1,8 @@
+@import "global-imports";
+
+.spinner {
+  @include flexContainer();
+  @include flexChild(center, center);
+  width: 100%;
+  padding: 0.7rem;
+}

@@ -1,0 +1,56 @@
+<div class="addArticle__wrapper">
+  <div class="addArticle__heading">{{ headingPrefix }} Article</div>
+  <form
+    (ngSubmit)="onSubmit()"
+    class="addArticle__form"
+    [formGroup]="articleForm"
+  >
+    <mat-form-field appearance="fill">
+      <mat-label>Article Title</mat-label>
+      <input matInput required formControlName="title" />
+      <mat-error>{{ getTitleErrorMessage() }}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>What's this article about?</mat-label>
+      <input matInput required formControlName="description" />
+      <mat-error>{{ getDescriptionErrorMessage() }}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Write your article</mat-label>
+      <textarea matInput required formControlName="body"></textarea>
+      <mat-error>{{ getBodyErrorMessage() }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Tags</mat-label>
+      <mat-chip-list #chipList aria-label="Tags selection">
+        <mat-chip *ngFor="let tag of tags" (removed)="removeTag(tag)">
+          {{ tag }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input
+          placeholder="Enter Tag..."
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeyCodes"
+          (matChipInputTokenEnd)="addTag($event)"
+        />
+      </mat-chip-list>
+    </mat-form-field>
+
+    <ng-template [ngIf]="!isLoading" [ngIfElse]="loading">
+      <button
+        mat-raised-button
+        class="addArticle__btn"
+        color="primary"
+        [disabled]="!articleForm.valid"
+      >
+        Submit
+      </button>
+    </ng-template>
+    <ng-template #loading>
+      <app-spinner></app-spinner>
+    </ng-template>
+  </form>
+</div>

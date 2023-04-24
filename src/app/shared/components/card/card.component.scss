@@ -1,0 +1,61 @@
+@import "global-imports";
+
+.card {
+  display: inline-block;
+  width: 25rem;
+  height: 100%;
+  box-shadow: 0 0 1rem -0.2rem #999;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  @media only screen and (max-width: 430px) {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+
+  &__icon {
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: #222;
+    overflow: hidden;
+
+    & > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__header {
+    border-bottom: 1px solid #ccc;
+  }
+  &__title {
+    @include fontStyle($font-size: 1.3rem, $font-weight: $text-bold);
+  }
+  &__content {
+    cursor: pointer;
+    padding: 1rem;
+    @media only screen and (max-width: 430px) {
+      padding: 0;
+    }
+  }
+  &__tags {
+    @include flexContainer(column);
+    @include fontStyle(0.9rem);
+    color: #888;
+    line-height: 2rem;
+    margin-bottom: 1rem;
+  }
+  &__option {
+    @include flexContainer();
+    @include flexChild(flex-end);
+    margin-bottom: 0 !important;
+  }
+  &__btn {
+    @include flexContainer();
+    @include flexChild(center, center);
+    margin: 0 0.3rem;
+  }
+}

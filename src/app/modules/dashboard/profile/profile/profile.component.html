@@ -1,0 +1,23 @@
+<div class="profile">
+  <ng-template [ngIf]="isLoading" [ngIfElse]="loadded">
+    <app-spinner></app-spinner>
+  </ng-template>
+
+  <ng-template #loadded>
+    <div class="profile__avatar">
+      <img
+        src="{{ user.image }}"
+        alt="user image"
+        class="profile__avatar-img"
+      />
+    </div>
+    <div class="profile__info">
+      <div class="profile__data">username - {{ user.username }}</div>
+      <div class="profile__data">email - {{ user.email }}</div>
+      <div class="profile__data">{{ user.bio }}</div>
+    </div>
+    <div class="profile__count" routerLink="/">
+      Articles Published: {{ articlesCount }}
+    </div>
+  </ng-template>
+</div>

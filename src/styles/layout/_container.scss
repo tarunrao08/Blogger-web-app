@@ -1,0 +1,5 @@
+.container {
+  @include flexContainer($flex-direction: column);
+  @include flexChild(center, center);
+  flex: 1;
+}

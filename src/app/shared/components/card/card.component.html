@@ -1,0 +1,47 @@
+<mat-card class="card">
+  <mat-card-content (click)="openArticle()" class="card__content">
+    <mat-card-title class="card__title">{{
+      article.title | titlecase
+    }}</mat-card-title>
+    <p>
+      {{
+        article.description.length < 100
+          ? article.description
+          : (article.description | slice: 0:100) + " ...Read More"
+      }}
+    </p>
+  </mat-card-content>
+
+  <div class="card__tags" *ngIf="article.tagList?.length">
+    Tags:
+    <mat-chip-list>
+      <mat-chip *ngFor="let tag of article.tagList">{{ tag }}</mat-chip>
+    </mat-chip-list>
+  </div>
+  <mat-card-actions class="card__option" *ngIf="utils.isEditable(article)">
+    <button
+      mat-raised-button
+      class="card__btn"
+      (click)="editArticle()"
+      [disabled]="isDeleting"
+    >
+      <mat-icon aria-hidden="false" aria-label="Delete Icon">edit</mat-icon>
+      Edit
+    </button>
+    <button
+      mat-raised-button
+      color="warn"
+      class="card__btn"
+      (click)="deletePost()"
+      [disabled]="isDeleting"
+    >
+      <ng-template [ngIf]="isDeleting" [ngIfElse]="deleted">
+        <app-spinner [size]="20"></app-spinner>
+      </ng-template>
+      <ng-template #deleted>
+        <mat-icon aria-hidden="false" aria-label="Delete Icon">delete</mat-icon
+        >Delete
+      </ng-template>
+    </button>
+  </mat-card-actions>
+</mat-card>

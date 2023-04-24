@@ -1,0 +1,28 @@
+@import "global-imports";
+
+.addArticle {
+  &__wrapper {
+    @include flexContainer(column);
+    @include flexChild(center, center);
+    min-height: 90vh;
+    width: 100%;
+  }
+  &__heading {
+    @include fontStyle();
+    margin-bottom: 2rem;
+  }
+  &__form {
+    @include flexContainer(column);
+    width: 50rem;
+    padding: 1rem;
+    border: 1px dotted #222;
+
+    @media only screen and (max-width: 800px) {
+      width: 100%;
+    }
+  }
+  &__btn {
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+  }
+}

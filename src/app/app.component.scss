@@ -1,0 +1,7 @@
+@import "global-imports";
+
+.app-container {
+  @include flexContainer($flex-direction: column);
+  flex: 1;
+  width: 100%;
+}

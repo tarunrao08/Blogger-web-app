@@ -1,0 +1,70 @@
+@import "global-imports";
+
+.cards {
+  @include flexContainer();
+  @include flexChild(center, flex-start);
+
+  @media only screen and (max-width: 430px) {
+    padding: 1rem;
+  }
+}
+
+.dashboard-page {
+  &__heading {
+    @include fontStyle();
+    text-align: center;
+    margin: 1rem 0;
+  }
+  &__sub-heading {
+    @include fontStyle($font-size: 1.4rem, $font-weight: $text-lighter);
+    text-align: center;
+  }
+}
+
+.noArticle {
+  @include flexContainer();
+  @include flexChild(center, center);
+  @include fontStyle($font-weight: $text-lighter);
+  padding: 5rem;
+
+  &__btn {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+  }
+
+  &__notfound {
+    text-align: center;
+  }
+}
+
+.filter__btn {
+  margin-left: 1rem;
+}
+
+.filter-form {
+  @include flexContainer();
+  @include flexChild(center, center);
+  width: 100%;
+  margin: 1rem 0;
+
+  @media only screen and (max-width: 430px) {
+    @include flexContainer($flex-direction: column);
+  }
+
+  &__group {
+    margin: 0.5rem;
+    display: flex;
+  }
+
+  &__search {
+    padding: 0.5rem 0.6rem;
+    border: 1px dotted $color-dark;
+  }
+
+  &__btn {
+    cursor: pointer;
+    margin: 0.5rem;
+  }
+}

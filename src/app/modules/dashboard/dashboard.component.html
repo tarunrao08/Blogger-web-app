@@ -1,0 +1,8 @@
+<div class="dashboard">
+  <ng-template [ngIf]="isNavigating" [ngIfElse]="navigated">
+    <app-spinner></app-spinner>
+  </ng-template>
+  <ng-template #navigated>
+    <router-outlet></router-outlet>
+  </ng-template>
+</div>

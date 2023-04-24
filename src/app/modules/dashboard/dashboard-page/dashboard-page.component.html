@@ -1,0 +1,91 @@
+<h2 class="dashboard-page__heading">{{ username }}'s Dashboard</h2>
+<div class="filter">
+  <button
+    (click)="openFilter()"
+    class="filter__btn"
+    mat-button
+    color="primary"
+    matBadge="{{ filtersApplied }}"
+    matBadgePosition="before"
+    matBadgeColor="accent"
+  >
+    <mat-icon>segment</mat-icon> Filter Results
+  </button>
+  <div *ngIf="filterOpen" class="filter-form">
+    <div class="filter-form__group">
+      <input
+        type="search"
+        class="filter-form__search"
+        placeholder="Search by author name"
+        [(ngModel)]="searchAuthor"
+      />
+    </div>
+    <div class="filter-form__group">
+      <input
+        type="search"
+        class="filter-form__search"
+        placeholder="Search by tag"
+        [(ngModel)]="searchTag"
+      />
+    </div>
+    <button
+      class="filter-form__btn"
+      (click)="searchWithFilters()"
+      mat-flat-button
+      color="accent"
+    >
+      Search
+    </button>
+    <button mat-button (click)="resetFilters()" color="warn">Reset</button>
+  </div>
+</div>
+
+<div class="dashboard-page__sub-heading" *ngIf="selectedTag.length">
+  Articles for {{ selectedTag }} tag.
+</div>
+<ng-template [ngIf]="isLoading" [ngIfElse]="loaded">
+  <app-spinner></app-spinner>
+</ng-template>
+<ng-template #loaded>
+  <ng-template [ngIf]="filteredArticle.length > 0" [ngIfElse]="noArticles">
+    <div class="cards">
+      <app-card
+        *ngFor="let article of filteredArticle"
+        [article]="article"
+        (delete)="deleteArticle(article.slug)"
+        (open)="openArticle(article.slug)"
+        (edit)="editArticle(article.slug)"
+      ></app-card>
+    </div>
+  </ng-template>
+  <ng-template #noArticles>
+    <ng-template [ngIf]="isFiltered" [ngIfElse]="nonFiltered">
+      <p class="noArticle__notfound">No Article Found.</p>
+    </ng-template>
+    <ng-template #nonFiltered>
+      <div class="noArticle">
+        <button
+          class="noArticle__btn"
+          mat-raised-button
+          color="primary"
+          (click)="navigateTo('add-article')"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        Add your first article.
+      </div>
+    </ng-template>
+  </ng-template>
+</ng-template>
+
+<div class="pagination" *ngIf="isLoading == false">
+  <mat-paginator
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="[5, 10, 25, 50]"
+    aria-label="Select page"
+    (page)="pageEvent = getServerData($event)"
+  >
+  </mat-paginator>
+</div>

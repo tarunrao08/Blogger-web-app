@@ -1,0 +1,43 @@
+<form (ngSubmit)="onSubmit()" class="form">
+  <div class="form__heading">Log-In</div>
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input [formControl]="email" type="email" matInput required />
+    <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input [formControl]="password" type="password" matInput required />
+    <mat-error *ngIf="password.invalid">{{
+      getPasswordErrorMessage()
+    }}</mat-error>
+  </mat-form-field>
+  <div
+    title="Please fix these errors"
+    class="form__error"
+    *ngFor="let error of errors | keyvalue"
+  >
+    <mat-error *ngIf="error.value"
+      >* {{ error.key }} {{ error.value }}</mat-error
+    >
+  </div>
+  <ng-template [ngIf]="!isLoading" [ngIfElse]="loading">
+    <button
+      mat-raised-button
+      color="primary"
+      class="form__btn"
+      [disabled]="email.invalid || password.invalid"
+    >
+      Log In
+    </button>
+  </ng-template>
+  <ng-template #loading>
+    <app-spinner></app-spinner>
+  </ng-template>
+  <div class="form__error">
+    <mat-error *ngIf="otherError">{{ otherError }}</mat-error>
+  </div>
+  <a [routerLink]="['/signup']" class="form__link" href=""
+    >Create a new account?</a
+  >
+</form>

@@ -1,0 +1,60 @@
+<ng-template [ngIf]="isLoading" [ngIfElse]="loaded">
+  <app-spinner></app-spinner>
+</ng-template>
+<ng-template #loaded>
+  <div class="article">
+    <div class="article__details">
+      <h2 class="article__heading">{{ article.title }}</h2>
+      <ng-template [ngIf]="utils.isEditable(article)" [ngIfElse]="other">
+        <button
+          class="article__btn"
+          mat-stroked-button
+          (click)="editArticle(article.slug)"
+          [disabled]="isDeleting"
+        >
+          <mat-icon>edit</mat-icon> Edit Aritcle
+        </button>
+        <button
+          class="article__btn"
+          mat-raised-button
+          color="accent"
+          (click)="onDelete(article.slug)"
+          [disabled]="isDeleting"
+        >
+          <ng-template [ngIf]="isDeleting" [ngIfElse]="deleted">
+            <app-spinner [size]="20" *ngIf="isDeleting"></app-spinner>
+          </ng-template>
+          <ng-template #deleted>
+            <mat-icon>delete</mat-icon> Delete
+          </ng-template>
+        </button>
+      </ng-template>
+      <ng-template #other>
+        by -
+        <button
+          (click)="moreOfAuthor(article.author?.['username'])"
+          title="More article of the author"
+          mat-stroked-button
+        >
+          <span class="article__btn-icon">
+            <img
+              src="{{article.author?.['image']}}"
+              alt=""
+              class="article__btn-img"
+            />
+          </span>
+          {{article.author?.['username']}}
+        </button>
+      </ng-template>
+    </div>
+
+    <p class="article__body">{{ article.body }}</p>
+    <div class="article__tagList">
+      <mat-chip-list>
+        <mat-chip *ngFor="let tag of article.tagList" class="article__tag">{{
+          tag
+        }}</mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+</ng-template>

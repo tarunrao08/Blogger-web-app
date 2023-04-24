@@ -1,0 +1,20 @@
+@mixin flexContainer($flex-direction: row, $wrap: wrap) {
+  display: flex;
+  flex-direction: $flex-direction;
+  flex-wrap: $wrap;
+}
+
+@mixin flexChild($justify-content: normal, $align-items: normal) {
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin fontStyle(
+  $font-size: 1.8rem,
+  $line-height: auto,
+  $font-weight: $text-bold
+) {
+  font-size: $font-size;
+  line-height: $line-height;
+  font-weight: $font-weight;
+}
